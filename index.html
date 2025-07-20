@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kalākriti Gallery</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
+  <!-- Font Awesome for real social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      background: linear-gradient(145deg, #0a0a0a 75%, #1a1a1a 85%, #d4af37 100%);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    .logo img { height: 80px; width: auto; }
+
+    
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover { color: #d4af37; }
+
+    section {
+      padding: 80px 30px 60px;
+      min-height: 60vh;
+      text-align: center;
+    }
+
+    h1 { font-size: 2em; margin-bottom: 10px; }
+    h2 { font-size: 1.2em; margin-top: 20px; margin-bottom: 10px; }
+    p { font-size: 1em; color: #ccc; line-height: 1.6; }
+
+    .gallery-preview, .gallery-box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .gallery-preview img {
+      width: 250px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .gallery-preview img:hover { transform: scale(1.05); }
+
+    .upload-form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .upload-form input {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .upload-form button {
+      background-color: #d4af37;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .upload-form button:hover {
+      background-color: #b6952e;
+    }
+
+    .gallery-card {
+      background: #111;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(255,255,255,0.05);
+      width: 220px;
+      transition: transform 0.3s;
+    }
+
+    .gallery-card:hover { transform: scale(1.03); }
+
+    .gallery-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: zoom-in;
+    }
+
+    .gallery-card p {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+
+    .delete-btn {
+      margin-top: 8px;
+      padding: 5px 10px;
+      border: none;
+      background: #d9534f;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 10px;
+      margin-bottom: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+
+    .contact-form button {
+      background-color: #d4af37;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .contact-form button:hover { background-color: #b6952e; }
+
+    .review-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .review {
+      background-color: rgba(255,255,255,0.05);
+      padding: 15px;
+      border-left: 5px solid #8cc34a;
+      border-radius: 8px;
+      width: 300px;
+      text-align: left;
+    }
+
+    .review span {
+      display: block;
+      margin-top: 10px;
+      color: #ccc;
+      font-style: italic;
+    }
+
+    .stars { color: #ffd700; font-size: 1.2em; }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+      font-size: 1.8em;
+    }
+
+    .social-links a {
+      color: #fff;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover { color: #d4af37; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #101010;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    #lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #lightbox-img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    /* Add spacing between home and gallery */
+    #gallery {
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo"><img src="ChatGPT Image Jul 9, 2025, 03_06_52 PM.png" alt="Kalākriti Logo"></div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#upload">Upload</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#review">Review</a></li>
+        <li><a href="#signin">Sign In</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  
+
+  <section id="home" style="background: url('backgriund.2.png') center/cover no-repeat fixed; padding-bottom: 120px;">
+    <h1>Welcome to Kalākriti</h1>
+    <h1>A Masterpiece of Indian Visual Art</h1>
+    <p>Kalākriti is a complete photo gallery website for photographers and artists.</p>
+    <p>Designed to look amazing on all devices, Kalākriti comes loaded with features!</p>
+    <div class="gallery-preview">
+      <img src="sun.jpg">
+      <img src="mountain.jpg">
+      <img src="bridal.jpg">
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h1>Gallery</h1>
+    <p>Explore stunning moments captured through the lens.</p>
+    <div class="gallery-preview">
+      <img src="kathak.jpg">
+      <img src="durga puja.jpg">
+      <img src="band.jpg">
+    </div>
+  </section>
+
+  <section id="about">
+    <h1>About Us</h1>
+    <p>Kalākriti — meaning “a masterpiece” in Sanskrit — is more than just a photo gallery. It is a celebration of Indian creativity, culture, and visual storytelling.</p>
+    <p>Designed for photographers, artists, and dreamers, Kalākriti serves as a digital canvas where every image tells a story and every frame preserves emotion.</p>
+    <p>This platform features diverse categories — Nature, Adventure, Bridal, and Fashion — showcasing work in a sleek, immersive, and elegant setting.</p>
+    <p>Whether you’re an aspiring photographer or a visual art lover, Kalākriti invites you to explore, connect, and contribute to a gallery of soulful masterpieces.</p>
+  </section>
+
+  <section id="upload">
+    <h1>Upload Your Photos</h1>
+    <p>Select a category and preview your photo before upload.</p>
+    <div class="upload-section">
+      <div id="upload-forms"></div>
+      <div class="gallery-box" id="uploaded-photos"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h1>Contact Us</h1>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="4" placeholder="Your Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="social-links">
+      <a href="https://www.facebook.com/sambhas.maiti?mibextid=ZbWKwL" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/sambhas_maiti005?igsh=OGhzNXNkd2x5ZWpj" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/SambhasMaiti?t=RO5NkMrdBQh-ZnWMHyhayQ&s=09" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://youtube.com/@sambhasmaiti-f7m?si=kfInDqStJjx1mduo" title="YouTube" target="_blank"><i class="fab fa-youtube"></i></a>
+    </div>
+  </section>
+
+  <section id="review">
+    <h1>Visitor Reviews</h1>
+    <div class="review-section">
+      <div class="review">
+        <p>“A beautifully designed gallery. Love the responsive layout!”</p>
+        <div class="stars">★★★★★</div>
+        <span>- Priya Das</span>
+      </div>
+      <div class="review">
+        <p>“Helped me showcase my portfolio professionally.”</p>
+        <div class="stars">★★★★★</div>
+        <span>- Arjun Roy</span>
+      </div>
+      <div class="review">
+        <p>“Simple, elegant, and effective. Highly recommended!”</p>
+        <div class="stars">★★★★☆</div>
+        <span>- Meera Sen</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Designed by Sambhas maiti|© 2025 Kalākriti Gallery. All Rights Reserved</p>
+    <p>Email us at: <a href="mailto:hello@kalakriti.com" style="color: #d4af37;">hello@kalakriti.com</a></p>
+    <p>Follow us on social media and stay connected. Based in Kolkata, India.</p>
+  </footer>
+
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="Preview">
+  </div>
+
+  <script>
+    const categories = ['Nature', 'Adventure', 'Bridal', 'Model'];
+
+    function createForms() {
+      const container = document.getElementById('upload-forms');
+      categories.forEach(cat => {
+        const form = document.createElement('form');
+        form.className = 'upload-form';
+        form.innerHTML = `
+          <h2>📷 ${cat}</h2>
+          <input type="file" accept="image/*" onchange="handleUpload(event, '${cat}')" required />
+        `;
+        container.appendChild(form);
+      });
+    }
+
+    function handleUpload(event, category) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const base64 = e.target.result;
+        const stored = JSON.parse(localStorage.getItem("kalakritiUploads") || "[]");
+        stored.push({ category, base64 });
+        localStorage.setItem("kalakritiUploads", JSON.stringify(stored));
+        renderUploadedPhotos();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function renderUploadedPhotos() {
+      const container = document.getElementById("uploaded-photos");
+      container.innerHTML = "";
+      const stored = JSON.parse(localStorage.getItem("kalakritiUploads") || "[]");
+      stored.forEach((img, index) => {
+        const card = document.createElement("div");
+        card.className = "gallery-card";
+        card.innerHTML = `
+          <img src="${img.base64}" alt="${img.category}" onclick="openLightbox('${img.base64}')" />
+          <p>${img.category}</p>
+          <button class="delete-btn" onclick="deleteImage(${index})">🗑 Delete</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function deleteImage(index) {
+      let stored = JSON.parse(localStorage.getItem("kalakritiUploads") || "[]");
+      stored.splice(index, 1);
+      localStorage.setItem("kalakritiUploads", JSON.stringify(stored));
+      renderUploadedPhotos();
+    }
+
+    function openLightbox(src) {
+      document.getElementById("lightbox").style.display = "flex";
+      document.getElementById("lightbox-img").src = src;
+    }
+
+    document.getElementById("lightbox").onclick = () => {
+      document.getElementById("lightbox").style.display = "none";
+      document.getElementById("lightbox-img").src = "";
+    };
+
+    window.onload = () => {
+      createForms();
+      renderUploadedPhotos();
+    };
+  </script>
+
+</body>
+</html>
